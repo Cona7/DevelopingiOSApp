@@ -17,36 +17,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="zUE-uS-sJO">
-                                <rect key="frame" x="16" y="85" width="127.5" height="102.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pY0-sX-Iiu">
+                                <rect key="frame" x="16" y="57" width="343" height="96.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3df-dF-ijA">
-                                        <rect key="frame" x="0.0" y="0.0" width="83.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter food name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6iq-F1-iGl">
-                                        <rect key="frame" x="0.0" y="31.5" width="127.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ez-Pa-9gU">
-                                        <rect key="frame" x="0.0" y="72.5" width="115" height="30"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="343" height="30"/>
                                         <state key="normal" title="Set default value"/>
+                                        <connections>
+                                            <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UpV-Kv-pKT"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="zUE-uS-sJO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="65" id="Sfm-At-072"/>
-                            <constraint firstItem="zUE-uS-sJO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="n9l-A3-fJ6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zUE-uS-sJO" secondAttribute="trailing" constant="215.5" id="v2E-CD-H0L"/>
+                            <constraint firstItem="pY0-sX-Iiu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="37" id="5Ww-9t-pzC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pY0-sX-Iiu" secondAttribute="trailing" constant="16" id="6U7-KD-hGv"/>
+                            <constraint firstItem="pY0-sX-Iiu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="GRD-9r-ftv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="6iq-F1-iGl" id="iXB-5q-Pq4"/>
+                        <outlet property="nameTextLabel" destination="3df-dF-ijA" id="o8a-dO-FI3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
