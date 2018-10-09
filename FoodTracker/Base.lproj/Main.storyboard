@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pY0-sX-Iiu">
-                                <rect key="frame" x="16" y="57" width="343" height="96.5"/>
+                                <rect key="frame" x="16" y="40" width="343" height="424.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3df-dF-ijA">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -39,12 +39,22 @@
                                             <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UpV-Kv-pKT"/>
                                         </connections>
                                     </button>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="mastodonDefault" translatesAutoresizingMaskIntoConstraints="NO" id="pMc-Yg-fZB">
+                                        <rect key="frame" x="0.0" y="104.5" width="343" height="320"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="pMc-Yg-fZB" secondAttribute="height" multiplier="343:320" id="NAa-XZ-1aO"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Bcg-sN-xrr" appends="YES" id="dtY-7J-4FR"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pY0-sX-Iiu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="37" id="5Ww-9t-pzC"/>
+                            <constraint firstItem="pY0-sX-Iiu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="5Ww-9t-pzC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pY0-sX-Iiu" secondAttribute="trailing" constant="16" id="6U7-KD-hGv"/>
                             <constraint firstItem="pY0-sX-Iiu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="GRD-9r-ftv"/>
                         </constraints>
@@ -53,11 +63,20 @@
                     <connections>
                         <outlet property="nameTextField" destination="6iq-F1-iGl" id="iXB-5q-Pq4"/>
                         <outlet property="nameTextLabel" destination="3df-dF-ijA" id="o8a-dO-FI3"/>
+                        <outlet property="photoImageView" destination="pMc-Yg-fZB" id="joP-95-m08"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Bcg-sN-xrr">
+                    <connections>
+                        <action selector="selectPhotoFromLibrary:" destination="BYZ-38-t0r" id="JU8-kw-BTb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="27.436281859070466"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mastodonDefault" width="210" height="210"/>
+    </resources>
 </document>
