@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pY0-sX-Iiu">
-                                <rect key="frame" x="16" y="40" width="343" height="424.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pY0-sX-Iiu">
+                                <rect key="frame" x="16" y="40" width="343" height="476.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3df-dF-ijA">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="83.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -33,23 +33,29 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ez-Pa-9gU">
-                                        <rect key="frame" x="0.0" y="66.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="115" height="30"/>
                                         <state key="normal" title="Set default value"/>
                                         <connections>
                                             <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UpV-Kv-pKT"/>
                                         </connections>
                                     </button>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="mastodonDefault" translatesAutoresizingMaskIntoConstraints="NO" id="pMc-Yg-fZB">
-                                        <rect key="frame" x="0.0" y="104.5" width="343" height="320"/>
+                                        <rect key="frame" x="0.0" y="104.5" width="320" height="320"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="pMc-Yg-fZB" secondAttribute="height" multiplier="343:320" id="NAa-XZ-1aO"/>
+                                            <constraint firstAttribute="width" secondItem="pMc-Yg-fZB" secondAttribute="height" multiplier="1:1" id="ymb-Wf-xmK"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Bcg-sN-xrr" appends="YES" id="dtY-7J-4FR"/>
                                         </connections>
                                     </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jmW-RM-snH" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="432.5" width="252" height="44"/>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6iq-F1-iGl" secondAttribute="trailing" id="ZGy-ce-8f8"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,6 +83,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mastodonDefault" width="210" height="210"/>
+        <image name="mastodonDefault" width="750" height="750"/>
     </resources>
 </document>
