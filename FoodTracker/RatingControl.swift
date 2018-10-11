@@ -22,9 +22,13 @@ import UIKit
         }
     }
 
-    private var ratingButtons = [UIButton]()
+    var rating = 0 {
+        didSet {
+            updateButtonSelectionStates()
+        }
+    }
 
-    var rating = 0
+    private var ratingButtons = [UIButton]()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,26 +46,45 @@ import UIKit
 
         clearButtons()
 
-        for _ in 0..<starts {
+        let bundle = Bundle(for: type(of: self))
+        let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
+        let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
+        let highlightedStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
+
+        for index in 0..<starts {
         let button = UIButton()
-        button.backgroundColor = UIColor.red
+        button.setImage(emptyStar, for: .normal)
+        button.setImage(filledStar, for: .selected)
+        button.setImage(highlightedStar, for: .highlighted)
+        button.setImage(highlightedStar, for: [.highlighted, .selected])
+        button.accessibilityLabel = "Set \(index + 1) star rating"
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: starSize.height).isActive = true
         button.widthAnchor.constraint(equalToConstant: starSize.width).isActive = true
-
-        addArrangedSubview(button)
-
         button.addTarget(self ,
                          action: #selector(RatingControl.ratingButtonTapped(button: )),
                          for: .touchUpInside)
 
+        addArrangedSubview(button)
+
         ratingButtons.append(button)
         }
+
+        updateButtonSelectionStates()
     }
 
     @objc
     func ratingButtonTapped(button: UIButton) {
-        print("Button pressed 👍")
+        guard let index = ratingButtons.index(of: button) else {
+            fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")}
+
+        let selectedRating = index + 1
+
+        if selectedRating == rating {
+            rating = 0
+        } else {
+            rating = selectedRating
+        }
     }
 
     func clearButtons() {
@@ -70,5 +93,11 @@ import UIKit
             button.removeFromSuperview()
         }
         ratingButtons.removeAll()
+    }
+
+    private func updateButtonSelectionStates() {
+        for (index, button) in ratingButtons.enumerated() {
+            button.isSelected = index < rating
+        }
     }
 }
