@@ -2,12 +2,10 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "220px-Mastodon-The_Hunter.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "mastodon_leviathan.jpg",
       "scale" : "2x"
     },
     {
