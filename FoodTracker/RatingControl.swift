@@ -46,28 +46,26 @@ import UIKit
 
         clearButtons()
 
-        let bundle = Bundle(for: type(of: self))
-        let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
-        let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
-        let highlightedStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
+        let filledStar = UIImage(named: "filledStar")
+        let emptyStar = UIImage(named: "emptyStar")
+        let highlightedStar = UIImage(named: "highlightedStar")
 
         for index in 0..<starts {
-        let button = UIButton()
-        button.setImage(emptyStar, for: .normal)
-        button.setImage(filledStar, for: .selected)
-        button.setImage(highlightedStar, for: .highlighted)
-        button.setImage(highlightedStar, for: [.highlighted, .selected])
-        button.accessibilityLabel = "Set \(index + 1) star rating"
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: starSize.height).isActive = true
-        button.widthAnchor.constraint(equalToConstant: starSize.width).isActive = true
-        button.addTarget(self ,
+            let button = UIButton()
+            button.setImage(emptyStar, for: .normal)
+            button.setImage(filledStar, for: .selected)
+            button.setImage(highlightedStar, for: .highlighted)
+            button.setImage(highlightedStar, for: [.highlighted, .selected])
+            button.accessibilityLabel = "Set \(index + 1) star rating"
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.heightAnchor.constraint(equalToConstant: starSize.height).isActive = true
+            button.widthAnchor.constraint(equalToConstant: starSize.width).isActive = true
+            button.addTarget(self ,
                          action: #selector(RatingControl.ratingButtonTapped(button: )),
                          for: .touchUpInside)
+            addArrangedSubview(button)
 
-        addArrangedSubview(button)
-
-        ratingButtons.append(button)
+            ratingButtons.append(button)
         }
 
         updateButtonSelectionStates()
@@ -76,7 +74,8 @@ import UIKit
     @objc
     func ratingButtonTapped(button: UIButton) {
         guard let index = ratingButtons.index(of: button) else {
-            fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")}
+            fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")
+        }
 
         let selectedRating = index + 1
 
