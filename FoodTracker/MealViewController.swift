@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MealViewController: UIViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var nameTextLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var raitingControl: RatingControl!
 
@@ -22,20 +21,16 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITextFieldDelegate {
+extension MealViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
 
         return true
     }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        nameTextLabel.text = nameTextField.text
-    }
 }
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MealViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBAction func selectPhotoFromLibrary(_ sender: UITapGestureRecognizer) {
         nameTextField.resignFirstResponder()
