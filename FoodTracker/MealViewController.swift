@@ -23,6 +23,10 @@ class MealViewController: UIViewController {
 
         nameTextField.delegate = self
     }
+
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension MealViewController: UITextFieldDelegate {
@@ -31,6 +35,22 @@ extension MealViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
 
         return true
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        saveButton.isEnabled = false
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if nameTextField.text != "" {
+            navigationItem.title = textField.text
+
+            textField.isEnabled = false
+
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
     }
 }
 
