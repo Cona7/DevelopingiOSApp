@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class MealTableViewController: UITableViewController {
 
@@ -38,6 +39,37 @@ class MealTableViewController: UITableViewController {
         loadSampleMeals()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        switch segue.identifier ?? "" {
+
+        case "AddItem":
+                os_log("Adding a new meal.", log: OSLog.default, type: .debug)
+
+        case "ShowDetail":
+                guard let mealDetailViewController = segue.destination as? MealViewController
+                    else {
+                        fatalError("Unexpected destination: \(segue.destination)")
+                }
+
+                guard let selectedMealCell = sender as? MealTableViewCell
+                    else {
+                        fatalError("Unexpected sender: \(sender)")
+                }
+
+                guard let indexPath = tableView.indexPath(for: selectedMealCell) else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+
+                let selectedMeal = meals[indexPath.row]
+                mealDetailViewController.meal = selectedMeal
+        default:
+                fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+        }
+
+    }
+
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? MealViewController,
             let meal = sourceViewController.meal {
@@ -45,6 +77,7 @@ class MealTableViewController: UITableViewController {
             let newIndexPath = IndexPath(row: meals.count, section: 0)
 
             meals.append(meal)
+
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
     }
@@ -59,6 +92,7 @@ class MealTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "MealTableViewCell"
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                        for: indexPath) as? MealTableViewCell
             else {
