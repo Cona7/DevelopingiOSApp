@@ -12,17 +12,14 @@ import XCTest
 class FoodTrackerTests: XCTestCase {
 
     func testMealInitializationSucceess() {
-
         let zeroRatingMeal = Meal.init(name: "Zero", photo: nil, rating: 0)
         XCTAssertNotNil(zeroRatingMeal)
 
-        // Highest positive rating
         let positiveRatingMeal = Meal.init(name: "Positive", photo: nil, rating: 5)
         XCTAssertNotNil(positiveRatingMeal)
     }
 
     func testMealInitializatioeFail() {
-
         let negativeRatingMeal = Meal.init(name: "Negative", photo: nil, rating: -1)
         XCTAssertNil(negativeRatingMeal)
 
@@ -32,5 +29,4 @@ class FoodTrackerTests: XCTestCase {
         let largeRatingMeal = Meal.init(name: "Large", photo: nil, rating: 6)
         XCTAssertNil(largeRatingMeal)
     }
-
 }

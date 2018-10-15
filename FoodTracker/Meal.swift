@@ -9,12 +9,12 @@
 import UIKit
 
 class Meal {
+
     var name: String
     var photo: UIImage?
     var rating: Int
 
     init?(name: String, photo: UIImage?, rating: Int) {
-
         guard !name.isEmpty else {
             return nil
         }
