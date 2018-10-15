@@ -13,12 +13,12 @@
         <scene sceneID="igM-IG-jDY">
             <objects>
                 <tableViewController title="MealTableViewCell" id="VDJ-Qx-opX" customClass="MealTableViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ynN-rF-Rbu">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ynN-rF-Rbu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MealTableViewCell" rowHeight="90" id="GsD-L4-5Gi" customClass="MealTableViewCell" customModule="FoodTracker" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MealTableViewCell" rowHeight="90" id="GsD-L4-5Gi" customClass="MealTableViewCell" customModule="FoodTracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GsD-L4-5Gi" id="aZu-M8-Lmq">
@@ -46,6 +46,7 @@
                                     <outlet property="nameLabel" destination="3aa-39-cTa" id="vlK-i3-Mog"/>
                                     <outlet property="photo" destination="bC9-X0-2L1" id="TQY-PJ-LKm"/>
                                     <outlet property="ratingControl" destination="Lyo-4L-eEq" id="k2v-bR-Ve8"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="fQp-vO-Mgl"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -64,7 +65,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ufu-My-tqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245.59999999999999" y="30.295566502463057"/>
+            <point key="canvasLocation" x="154" y="27"/>
         </scene>
         <!--New Meal-->
         <scene sceneID="tne-QT-ifu">
@@ -173,10 +174,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZ1-h6-4IF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="27.339901477832512"/>
+            <point key="canvasLocation" x="1074" y="474"/>
         </scene>
     </scenes>
     <resources>
         <image name="mastodonDefault" width="750" height="750"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="fQp-vO-Mgl"/>
+    </inferredMetricsTieBreakers>
 </document>

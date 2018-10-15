@@ -22,6 +22,13 @@ class MealViewController: UIViewController {
         super.viewDidLoad()
 
         nameTextField.delegate = self
+
+        if let meal = meal {
+            navigationItem.title = meal.name
+            nameTextField.text   = meal.name
+            photoImageView.image = meal.photo
+            raitingControl.rating = meal.rating
+        }
     }
 
     @IBAction func cancel(_ sender: Any) {
