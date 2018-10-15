@@ -36,6 +36,8 @@ class MealTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = editButtonItem
+
         loadSampleMeals()
     }
 
@@ -55,7 +57,7 @@ class MealTableViewController: UITableViewController {
 
                 guard let selectedMealCell = sender as? MealTableViewCell
                     else {
-                        fatalError("Unexpected sender: \(sender)")
+                        fatalError("Unexpected sender: \(String(describing: sender))")
                 }
 
                 guard let indexPath = tableView.indexPath(for: selectedMealCell) else {
@@ -63,23 +65,44 @@ class MealTableViewController: UITableViewController {
                 }
 
                 let selectedMeal = meals[indexPath.row]
-                mealDetailViewController.meal = selectedMeal
-        default:
-                fatalError("Unexpected Segue Identifier; \(segue.identifier)")
-        }
 
+                mealDetailViewController.meal = selectedMeal
+
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        }
     }
 
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? MealViewController,
             let meal = sourceViewController.meal {
 
-            let newIndexPath = IndexPath(row: meals.count, section: 0)
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                meals[selectedIndexPath.row] = meal
 
-            meals.append(meal)
+                tableView.reloadData()
+            } else {
+                let newIndexPath = IndexPath(row: meals.count, section: 0)
 
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+                meals.append(meal)
+
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            meals.remove(at: indexPath.row)
+
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
