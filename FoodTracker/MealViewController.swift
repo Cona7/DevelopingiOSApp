@@ -76,7 +76,6 @@ extension MealViewController: UIImagePickerControllerDelegate, UINavigationContr
         imagePickerController.delegate = self
 
         present(imagePickerController, animated: true, completion: nil)
-
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

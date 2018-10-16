@@ -89,6 +89,7 @@ import UIKit
             removeArrangedSubview(button)
             button.removeFromSuperview()
         }
+
         ratingButtons.removeAll()
     }
 
@@ -97,6 +98,7 @@ import UIKit
             button.isSelected = index < rating
 
             let hintString: String?
+
             if rating == index + 1 {
                 hintString = "Tap to reset the rating to zero."
             } else {
@@ -104,6 +106,7 @@ import UIKit
             }
 
             let valueString: String
+
             switch rating {
             case 0:
                 valueString = "No rating set."
