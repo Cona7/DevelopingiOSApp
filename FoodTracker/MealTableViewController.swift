@@ -30,13 +30,11 @@ class MealTableViewController: UITableViewController {
                 os_log("Adding a new meal.", log: OSLog.default, type: .debug)
 
         case "ShowDetail":
-                guard let mealDetailViewController = segue.destination as? MealViewController
-                    else {
+                guard let mealDetailViewController = segue.destination as? MealViewController else {
                         fatalError("Unexpected destination: \(segue.destination)")
                 }
 
-                guard let selectedMealCell = sender as? MealTableViewCell
-                    else {
+                guard let selectedMealCell = sender as? MealTableViewCell else {
                         fatalError("Unexpected sender: \(String(describing: sender))")
                 }
 
@@ -109,9 +107,7 @@ extension MealTableViewController {
         return meals.count
     }
 
-    override func tableView(_ tableView: UITableView,
-                            commit editingStyle: UITableViewCell.EditingStyle,
-                            forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             meals.remove(at: indexPath.row)
 
@@ -122,9 +118,7 @@ extension MealTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "MealTableViewCell"
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
-                                                       for: indexPath) as? MealTableViewCell
-            else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MealTableViewCell else {
                 fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
 

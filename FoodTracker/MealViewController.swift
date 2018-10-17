@@ -25,7 +25,7 @@ class MealViewController: UIViewController {
 
         if let meal = meal {
             navigationItem.title = meal.name
-            nameTextField.text   = meal.name
+            nameTextField.text = meal.name
             photoImageView.image = meal.photo
             raitingControl.rating = meal.rating
         }
@@ -33,12 +33,10 @@ class MealViewController: UIViewController {
 
     @IBAction func cancel(_ sender: Any) {
 
-        let isPresentingInAddMealMode = presentingViewController is UINavigationController
-
-        if isPresentingInAddMealMode {
+        if presentingViewController != nil {
             dismiss(animated: true, completion: nil)
-        } else if let owningNavigationController = navigationController {
-            owningNavigationController.popViewController(animated: true)
+        } else if let navigationController = navigationController {
+            navigationController.popViewController(animated: true)
         } else {
             fatalError("The MealViewController is not inside a navigation controller.")
         }
@@ -60,8 +58,6 @@ extension MealViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if nameTextField.text != "" {
             navigationItem.title = textField.text
-
-            textField.isEnabled = false
 
             saveButton.isEnabled = true
         } else {
@@ -87,8 +83,7 @@ extension MealViewController: UIImagePickerControllerDelegate, UINavigationContr
         dismiss(animated: true, completion: nil)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
         guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
