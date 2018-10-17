@@ -59,4 +59,3 @@ extension Meal: NSCoding {
         aCoder.encode(rating, forKey: PropertyKey.rating)
     }
 }
-
