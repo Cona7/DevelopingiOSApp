@@ -1,0 +1,6 @@
+[submodule "Carthage/Checkouts/Alamofire"]
+	path = Carthage/Checkouts/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
+[submodule "Carthage/Checkouts/Storable"]
+	path = Carthage/Checkouts/Storable
+	url = https://github.com/Rep2/Storable.git

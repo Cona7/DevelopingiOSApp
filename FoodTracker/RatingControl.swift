@@ -8,7 +8,8 @@
 
 import UIKit
 
-@IBDesignable class RatingControl: UIStackView {
+@IBDesignable
+class RatingControl: UIStackView {
 
     @IBInspectable var starts: Int = 5 {
         didSet {
