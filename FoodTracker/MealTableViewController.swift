@@ -8,21 +8,18 @@
 
 import UIKit
 import os.log
+import Storable
 
 class MealTableViewController: UITableViewController {
 
-    var meals = [Meal]()
+    var mealsArray = MealsArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.leftBarButtonItem = editButtonItem
 
-        if let savedMeals = loadMeals() {
-            meals += savedMeals
-        } else {
-            loadSampleMeals()
-        }
+        loadSampleMeals()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,7 +43,7 @@ class MealTableViewController: UITableViewController {
                     fatalError("The selected cell is not being displayed by the table")
                 }
 
-                let selectedMeal = meals[indexPath.row]
+                let selectedMeal = mealsArray.meals[indexPath.row]
 
                 mealDetailViewController.meal = selectedMeal
 
@@ -60,17 +57,16 @@ class MealTableViewController: UITableViewController {
             let meal = sourceViewController.meal {
 
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                meals[selectedIndexPath.row] = meal
+                mealsArray.meals[selectedIndexPath.row] = meal
 
                 tableView.reloadData()
             } else {
-                let newIndexPath = IndexPath(row: meals.count, section: 0)
+                let newIndexPath = IndexPath(row: mealsArray.meals.count, section: 0)
 
-                meals.append(meal)
+                mealsArray.meals.append(meal)
 
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
-
             saveMeals()
         }
     }
@@ -87,12 +83,12 @@ extension MealTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meals.count
+        return mealsArray.meals.count
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            meals.remove(at: indexPath.row)
+            mealsArray.meals.remove(at: indexPath.row)
 
             saveMeals()
 
@@ -107,7 +103,7 @@ extension MealTableViewController {
                 fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
 
-        let meal = meals[indexPath.row]
+        let meal = mealsArray.meals[indexPath.row]
 
         cell.nameLabel.text = meal.name
         cell.photo.image = meal.photo
@@ -117,9 +113,28 @@ extension MealTableViewController {
     }
 }
 
-private extension MealTableViewController {
+extension MealTableViewController {
 
-    func loadSampleMeals() {
+    private func loadSampleMeals() {
+        do {
+            mealsArray = try MealsArray.fetchFromUserDefaults()
+        } catch {
+            print("can't load Meals")
+        }
+        if mealsArray.meals.isEmpty {
+            loadDefaultValues()
+        }
+    }
+
+    func saveMeals() {
+        do {
+            try mealsArray.saveInUserDefaults()
+        } catch {
+            print("can't save Meals")
+        }
+    }
+
+    func loadDefaultValues() {
         let photo1 = UIImage(named: "meal1")
         let photo2 = UIImage(named: "meal2")
         let photo3 = UIImage(named: "meal3")
@@ -136,21 +151,6 @@ private extension MealTableViewController {
             fatalError("Unable to instantiate meal2")
         }
 
-        meals += [meal1, meal2, meal3]
-    }
-
-    func saveMeals() {
-
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
-
-        if isSuccessfulSave {
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save meals...", log: OSLog.default, type: .error)
-        }
-    }
-
-    func loadMeals() -> [Meal]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
+        mealsArray.meals = [meal1, meal2, meal3]
     }
 }

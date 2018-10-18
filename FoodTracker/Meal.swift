@@ -8,12 +8,39 @@
 
 import UIKit
 import os.log
+import Storable
 
-class Meal: NSObject {
+struct Meal: Storable {
 
     var name: String
     var photo: UIImage?
     var rating: Int
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case photo
+        case rating
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        name = try values.decode(String.self, forKey: .name)
+        rating = try values.decode(Int.self, forKey: .rating)
+        let data = try values.decode(Data.self, forKey: .photo)
+        photo = UIImage(data: data)
+
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(name, forKey: .name)
+        try container.encode(rating, forKey: .rating)
+
+        let data = photo?.pngData()
+        try container.encode(data, forKey: .photo)
+    }
 
     init?(name: String, photo: UIImage?, rating: Int) {
         guard !name.isEmpty else {
@@ -27,35 +54,5 @@ class Meal: NSObject {
         self.name = name
         self.photo = photo
         self.rating = rating
-    }
-
-    required convenience init?(coder aDecoder: NSCoder) {
-        guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String else {
-            os_log("Unable to decode the name for a Meal object.", log: OSLog.default, type: .debug)
-            return nil
-        }
-
-        let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
-        let rating = aDecoder.decodeInteger(forKey: PropertyKey.rating)
-
-        self.init(name: name, photo: photo, rating: rating)
-    }
-}
-
-extension Meal: NSCoding {
-
-    struct PropertyKey {
-        static let name = "name"
-        static let photo = "photo"
-        static let rating = "rating"
-    }
-
-    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("meals")
-
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: PropertyKey.name)
-        aCoder.encode(photo, forKey: PropertyKey.photo)
-        aCoder.encode(rating, forKey: PropertyKey.rating)
     }
 }
